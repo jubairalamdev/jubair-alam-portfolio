@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
+import Link from 'next/link';
 
 const navLinks = [
   { name: 'Home', href: '#home' },
@@ -91,13 +92,13 @@ export default function Navbar() {
 
           {/* CTA Button Desktop */}
           <div className="hidden lg:block">
-            <a
-              href="#contact"
-              onClick={(e) => { e.preventDefault(); handleNavClick('#contact'); }}
+            <Link
+              target="_blank"
+              href="https://docs.google.com/document/d/1v7yN2TpiqF5Q8p3ld48m6L-NOm1UYd1hPXqqvFPkNkY/edit?usp=sharing"
               className="px-5 py-2.5 bg-accent hover:bg-accent-dark text-white text-sm font-semibold rounded-lg transition-all duration-200 hover:shadow-lg hover:shadow-accent/20"
             >
               Hire Me
-            </a>
+            </Link>
           </div>
 
           {/* Mobile Toggle */}

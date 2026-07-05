@@ -7,7 +7,7 @@ import { Code, Settings, Terminal } from 'lucide-react';
 // --- DATA ---
 const skillCategories = [
   {
-    title: 'Web Techs',
+    title: 'Frontend',
     icon: <Code size={24} className="text-accent" />,
     skills: [
       { name: 'React.js', level: 84 },
@@ -18,14 +18,14 @@ const skillCategories = [
     ],
   },
   {
-    title: 'Others',
+    title: 'Backend',
     icon: <Settings size={24} className="text-accent" />,
     skills: [
       { name: 'Github', level: 84 },
       { name: 'Linux', level: 73 },
       { name: 'MongoDB', level: 82 },
-      { name: 'WordPress', level: 65 },
-      { name: 'ExpressJS', level: 87 },
+      { name: 'Node.js', level: 65 },
+      { name: 'Express.js', level: 87 },
     ],
   }
 ];

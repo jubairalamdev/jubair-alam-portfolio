@@ -1,7 +1,9 @@
 "use client";
 
 import { useEffect, useState, useRef } from 'react';
-import { Download, ArrowRight, Github, Linkedin, Mail } from 'lucide-react';
+import { Download, ArrowRight, Github, Linkedin, Mail, ExternalLink } from 'lucide-react';
+import Image from 'next/image';
+import Link from 'next/link';
 
 const roles = ['Full Stack Developer', 'MERN Stack Expert', 'Problem Solver', 'UI/UX Enthusiast'];
 
@@ -248,14 +250,14 @@ useEffect(() => {
 
             {/* CTA Buttons */}
             <div className="flex flex-wrap gap-4 mb-10">
-              <a
-                href="/resume.pdf"
-                download
+              <Link
+              target="_blank"
+                href="https://docs.google.com/document/d/1v7yN2TpiqF5Q8p3ld48m6L-NOm1UYd1hPXqqvFPkNkY/edit?usp=sharing"
                 className="group inline-flex items-center gap-2 px-7 py-3.5 bg-accent hover:bg-accent-dark text-white font-semibold rounded-xl transition-all duration-200 hover:shadow-lg hover:shadow-accent/25"
               >
-                <Download size={18} />
-                Download CV
-              </a>
+                <ExternalLink size={18} />
+                Get CV
+              </Link>
               <a
                 href="#contact"
                 onClick={(e) => {
@@ -277,7 +279,7 @@ useEffect(() => {
                 {[
                   { icon: Github, href: 'https://github.com/jubairalamdev', label: 'GitHub' },
                   { icon: Linkedin, href: 'https://www.linkedin.com/in/jubair-alam-alif/', label: 'LinkedIn' },
-                  { icon: Mail, href: '#', label: 'Email' },
+                  { icon: Mail, href: 'mailto:jubairalam.dev@gmail.com', label: 'Email' },
                 ].map(({ icon: Icon, href, label }) => (
                   <a
                     key={label}
@@ -304,9 +306,11 @@ useEffect(() => {
               {/* Image container */}
               <div className="relative w-64 h-64 sm:w-80 sm:h-80 lg:w-[500px] lg:h-[500px] flex items-center justify-center">
                 <div className="absolute inset-0 flex items-center justify-center z-10">
-                  <img 
+                  <Image 
                     src='./assets/profile.png'
                     alt="Profile" 
+                    height={800}
+                    width={700}
                     className="w-[90%] h-[90%] -mt-16 object-cover rounded-full  shadow-2xl"
                   />
                 </div>
@@ -322,8 +326,8 @@ useEffect(() => {
 
               {/* Floating badges */}
               <div className="absolute z-10 md:bottom-10 -bottom-2 -left-1 md:left-10 px-4 py-2 bg-dark-600 border border-white/10 rounded-xl shadow-xl bouncing-div-1">
-                <div className="text-2xl font-bold text-accent">2+</div>
-                <div className="text-xs text-slate-400">Years Exp.</div>
+                <div className="text-2xl font-bold text-accent">1000+</div>
+                <div className="text-xs text-slate-400">Hours Coded</div>
               </div>
               <div className="absolute md:top-8 md:right-10 -top-2 -right-1 z-10 px-4 py-2 bg-dark-600 border border-white/10 rounded-xl shadow-xl bouncing-div-2">
                 <div className="text-2xl font-bold text-accent">20+</div>

@@ -2,47 +2,48 @@
 
 import { useState } from 'react';
 import { ExternalLink, Github, Folder } from 'lucide-react';
+import Image from 'next/image';
 
 const projects = [
   {
-    title: 'Ai Hub - React SPA',
+    title: 'Digital Life Lessons',
     description:
-      "AI Hub is a component-driven architecture, I ensured the site is modular, scalable, and easy to maintain.",
-    image: './assets/Ai-hub.png',
-    tags: ['React', 'JavaScript', 'Tailwind', 'DaisyUi', 'HTML'],
-    liveUrl: 'https://lnkd.in/gjMrvkKy ',
-    githubUrl: 'https://lnkd.in/gsrHEaFp',
+      "Digital Life Lessons is a Full Stack MERN Project with every social media like features available.",
+    image: './assets/digital-life-lessons.png',
+    tags: ['Next', 'Node', 'Express', 'Tailwind', 'Better Auth', "Stripe"],
+    liveUrl: 'https://digital-life-lessons-flame.vercel.app/',
+    githubUrl: 'https://github.com/jubairalamdev/digital-life-lessons-a10/tree/master',
     featured: true,
   },
   {
-    title: 'BPL Dream 11',
+    title: 'Paw Pals',
     description:
-      'Virtual Economy: Start your journey by claiming 20M free credits with a single click.',
-    image:"./assets/bpl-dream.png",
-    tags: ['React', 'JavaScript', 'Tailwind', 'DaisyUi', 'Toastify', 'HTML'],
-    liveUrl: 'https://bpl-dream-11-by-jubair-alam.netlify.app/',
-    githubUrl: 'https://github.com/jubairalamdev/bpl-dream-11',
+      'A home for every pets to get adopted with their best buddies. This website covers a economical system.',
+    image:"./assets/paw-pals.png",
+    tags: ['Next', 'Node', 'Express', 'DaisyUi', 'Toastify', 'Tailwind', "Better Auth"],
+    liveUrl: 'https://paw-pals-a9.vercel.app/',
+    githubUrl: 'https://github.com/jubairalamdev/Paw-Pals-A9',
     featured: true,
   },
   {
-    title: 'Dev Board Dashboard',
+    title: 'Cloud Read',
     description:
-      'DevBoard, was a deep dive into the core and fundamentals of React. ',
-    image: "./assets/dev-board.png",
-    tags: ['React', 'JavaScript', 'Tailwind', 'DaisyUi', 'HTML'],
+      'Cloud Read is a Fully Frontend project focusing on a library website system that is fully functional',
+    image: "./assets/cloud-read.png",
+    tags: ['Next', 'JavaScript', 'Tailwind', 'DaisyUi', 'Toastify'],
     liveUrl: ' https://dev-board-react-by-jubair-alam.netlify.app/',
     githubUrl: 'https://github.com/jubairalamdev/dev-board',
     featured: false,
   },
   {
-    title: 'Issue Tracker',
+    title: 'Keen Keeper',
     description:
-      ' Issue Tracking System that emphasizes clean architecture and real-time performance. ',
-    image: "./assets/issue-tracker.png",
-    tags: ['HTML5', 'Tailwind CSS', 'CSS', 'JavaScript', 'DaisyUi'],
+      'Keen Keeper is a communication website where people can call, chat and video call their beloved once.',
+    image: "./assets/keen-keeper.png",
+    tags: ['Next', 'Tailwind CSS', 'CSS', 'JavaScript', 'DaisyUi'],
     
-    liveUrl: 'https://github-issue-tracker-by-jubair-alam.netlify.app/',
-    githubUrl: 'https://github.com/jubairalamdev/Issue-Tracker-B13-A5/',
+    liveUrl: 'https://a7-keen-keeper-topaz.vercel.app/',
+    githubUrl: 'https://github.com/jubairalamdev/keen-keeper-A7',
     featured: false,
   },
   {
@@ -117,7 +118,7 @@ export default function Projects() {
             >
               {/* Project Image Placeholder */}
               <div className={`relative h-48 bg-gradient-to-br ${placeholderColors[index % placeholderColors.length]} overflow-hidden`}>
-                <img src={project.image} alt={project.title}/>
+                <Image width={500} height={500} src={project.image} alt={project.title}/>
 
                 {/* Overlay on hover */}
                 <div className="absolute inset-0 bg-dark-900/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-4">
