@@ -256,7 +256,7 @@ useEffect(() => {
                 className="group inline-flex items-center gap-2 px-7 py-3.5 bg-accent hover:bg-accent-dark text-white font-semibold rounded-xl transition-all duration-200 hover:shadow-lg hover:shadow-accent/25"
               >
                 <ExternalLink size={18} />
-                Get CV
+                GET CV
               </Link>
               <a
                 href="#contact"
