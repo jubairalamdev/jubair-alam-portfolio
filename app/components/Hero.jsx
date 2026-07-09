@@ -3,6 +3,7 @@
 import { useEffect, useState, useRef } from 'react';
 import { Download, ArrowRight, Github, Linkedin, Mail, ExternalLink } from 'lucide-react';
 import Image from 'next/image';
+import { motion } from "motion/react"
 import Link from 'next/link';
 
 const roles = ['Full Stack Developer', 'MERN Stack Expert', 'Problem Solver', 'UI/UX Enthusiast'];
@@ -36,174 +37,176 @@ export default function Hero() {
 
   const sphereRef = useRef(null);
 
-useEffect(() => {
-  const canvas = sphereRef.current;
-  if (!canvas) return;
-  const ctx = canvas.getContext('2d');
+  useEffect(() => {
+    const canvas = sphereRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
 
-  const size = 384;
-  const center = size / 2;
-  const radius = size * 0.38;
-  const dotsCount = 1200;
-  const fov = 300;
+    const size = 384;
+    const center = size / 2;
+    const radius = size * 0.38;
+    const dotsCount = 1200;
+    const fov = 300;
 
-  // Generate sphere points using fibonacci sphere distribution
-  const dots = [];
-  const goldenRatio = (1 + Math.sqrt(5)) / 2;
-  for (let i = 0; i < dotsCount; i++) {
-    const theta = Math.acos(1 - (2 * (i + 0.5)) / dotsCount);
-    const phi = 2 * Math.PI * i / goldenRatio;
-    dots.push({
-      x: Math.sin(theta) * Math.cos(phi),
-      y: Math.sin(theta) * Math.sin(phi),
-      z: Math.cos(theta),
-    });
-  }
-
-  // Audio data simulation (fake music bars)
-  const barCount = 64;
-  const bars = new Array(barCount).fill(0);
-  const barTargets = new Array(barCount).fill(0);
-
-  let angleY = 0;
-  let angleX = 0.15;
-  let frame = 0;
-  let animId;
-
-  function generateBarTargets() {
-    for (let i = 0; i < barCount; i++) {
-      // Simulate music frequency pattern
-      const freq = Math.sin(frame * 0.03 + i * 0.3) * 0.5 +
-        Math.sin(frame * 0.07 + i * 0.15) * 0.3 +
-        Math.sin(frame * 0.02 + i * 0.6) * 0.2;
-      barTargets[i] = Math.abs(freq) * 0.8 + Math.random() * 0.2;
-    }
-  }
-
-  function draw() {
-    frame++;
-    angleY += 0.004;
-
-    // Update bar targets every 3 frames for smoother feel
-    if (frame % 3 === 0) generateBarTargets();
-
-    // Smooth bar interpolation
-    for (let i = 0; i < barCount; i++) {
-      bars[i] += (barTargets[i] - bars[i]) * 0.15;
+    // Generate sphere points using fibonacci sphere distribution
+    const dots = [];
+    const goldenRatio = (1 + Math.sqrt(5)) / 2;
+    for (let i = 0; i < dotsCount; i++) {
+      const theta = Math.acos(1 - (2 * (i + 0.5)) / dotsCount);
+      const phi = 2 * Math.PI * i / goldenRatio;
+      dots.push({
+        x: Math.sin(theta) * Math.cos(phi),
+        y: Math.sin(theta) * Math.sin(phi),
+        z: Math.cos(theta),
+      });
     }
 
-    ctx.clearRect(0, 0, size, size);
+    // Audio data simulation (fake music bars)
+    const barCount = 64;
+    const bars = new Array(barCount).fill(0);
+    const barTargets = new Array(barCount).fill(0);
 
-    // Outer glow ring
-    const glowGrad = ctx.createRadialGradient(center, center, radius * 0.8, center, center, radius * 1.4);
-    glowGrad.addColorStop(0, 'rgba(16, 185, 129, 0.06)');
-    glowGrad.addColorStop(0.5, 'rgba(16, 185, 129, 0.03)');
-    glowGrad.addColorStop(1, 'rgba(16, 185, 129, 0)');
-    ctx.fillStyle = glowGrad;
-    ctx.beginPath();
-    ctx.arc(center, center, radius * 1.4, 0, Math.PI * 2);
-    ctx.fill();
+    let angleY = 0;
+    let angleX = 0.15;
+    let frame = 0;
+    let animId;
 
-    // Center glow
-    const centerGlow = ctx.createRadialGradient(center, center, 0, center, center, radius * 0.5);
-    centerGlow.addColorStop(0, 'rgba(16, 185, 129, 0.08)');
-    centerGlow.addColorStop(1, 'rgba(16, 185, 129, 0)');
-    ctx.fillStyle = centerGlow;
-    ctx.beginPath();
-    ctx.arc(center, center, radius * 0.5, 0, Math.PI * 2);
-    ctx.fill();
-
-    // Draw music bars (circular, behind sphere)
-    const barRadius = radius * 1.05;
-    const barWidth = (Math.PI * 2 * barRadius) / barCount * 0.6;
-    ctx.save();
-    for (let i = 0; i < barCount; i++) {
-      const angle = (i / barCount) * Math.PI * 2 - Math.PI / 2;
-      const barHeight = bars[i] * radius * 0.35;
-      const x1 = center + Math.cos(angle) * barRadius;
-      const y1 = center + Math.sin(angle) * barRadius;
-      const x2 = center + Math.cos(angle) * (barRadius + barHeight);
-      const y2 = center + Math.sin(angle) * (barRadius + barHeight);
-
-      const alpha = 0.15 + bars[i] * 0.5;
-      ctx.strokeStyle = `rgba(16, 185, 129, ${alpha})`;
-      ctx.lineWidth = barWidth;
-      ctx.lineCap = 'round';
-      ctx.beginPath();
-      ctx.moveTo(x1, y1);
-      ctx.lineTo(x2, y2);
-      ctx.stroke();
-    }
-    ctx.restore();
-
-    // Project and sort dots
-    const projected = dots.map((dot) => {
-      // Rotate Y
-      let x = dot.x * Math.cos(angleY) - dot.z * Math.sin(angleY);
-      let z = dot.x * Math.sin(angleY) + dot.z * Math.cos(angleY);
-      let y = dot.y;
-
-      // Rotate X (slight tilt)
-      let y2 = y * Math.cos(angleX) - z * Math.sin(angleX);
-      let z2 = y * Math.sin(angleX) + z * Math.cos(angleX);
-
-      const scale = fov / (fov + z2 * radius);
-      const px = center + x * radius * scale;
-      const py = center + y2 * radius * scale;
-
-      // Map z depth to a bar index for pulsing
-      const normalizedZ = (z2 + 1) / 2;
-      const barIdx = Math.floor(normalizedZ * (barCount - 1));
-      const pulse = 1 + bars[barIdx] * 0.15;
-
-      return {
-        x: px,
-        y: py,
-        z: z2,
-        scale: scale * pulse,
-      };
-    });
-
-    // Sort back to front
-    projected.sort((a, b) => a.z - b.z);
-
-    // Draw dots
-    for (const p of projected) {
-      const depth = (p.z + 1) / 2; // 0 = back, 1 = front
-      const alpha = 0.05 + depth * 0.85;
-      const dotSize = Math.max(0.5, 1.5 * p.scale);
-
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, dotSize, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(16, 185, 129, ${alpha})`;
-      ctx.fill();
-
-      // Bright glow on front-facing dots
-      if (depth > 0.75) {
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, dotSize * 2.5, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(16, 185, 129, ${(depth - 0.75) * 0.2})`;
-        ctx.fill();
+    function generateBarTargets() {
+      for (let i = 0; i < barCount; i++) {
+        // Simulate music frequency pattern
+        const freq = Math.sin(frame * 0.03 + i * 0.3) * 0.5 +
+          Math.sin(frame * 0.07 + i * 0.15) * 0.3 +
+          Math.sin(frame * 0.02 + i * 0.6) * 0.2;
+        barTargets[i] = Math.abs(freq) * 0.8 + Math.random() * 0.2;
       }
     }
 
-    // Inner highlight ring
-    ctx.beginPath();
-    ctx.arc(center, center, radius * 0.98, 0, Math.PI * 2);
-    ctx.strokeStyle = 'rgba(16, 185, 129, 0.04)';
-    ctx.lineWidth = 1;
-    ctx.stroke();
+    function draw() {
+      frame++;
+      angleY += 0.004;
 
-    animId = requestAnimationFrame(draw);
-  }
+      // Update bar targets every 3 frames for smoother feel
+      if (frame % 3 === 0) generateBarTargets();
 
-  draw();
+      // Smooth bar interpolation
+      for (let i = 0; i < barCount; i++) {
+        bars[i] += (barTargets[i] - bars[i]) * 0.15;
+      }
 
-  return () => cancelAnimationFrame(animId);
-}, []);
+      ctx.clearRect(0, 0, size, size);
+
+      // Outer glow ring
+      const glowGrad = ctx.createRadialGradient(center, center, radius * 0.8, center, center, radius * 1.4);
+      glowGrad.addColorStop(0, 'rgba(16, 185, 129, 0.06)');
+      glowGrad.addColorStop(0.5, 'rgba(16, 185, 129, 0.03)');
+      glowGrad.addColorStop(1, 'rgba(16, 185, 129, 0)');
+      ctx.fillStyle = glowGrad;
+      ctx.beginPath();
+      ctx.arc(center, center, radius * 1.4, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Center glow
+      const centerGlow = ctx.createRadialGradient(center, center, 0, center, center, radius * 0.5);
+      centerGlow.addColorStop(0, 'rgba(16, 185, 129, 0.08)');
+      centerGlow.addColorStop(1, 'rgba(16, 185, 129, 0)');
+      ctx.fillStyle = centerGlow;
+      ctx.beginPath();
+      ctx.arc(center, center, radius * 0.5, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Draw music bars (circular, behind sphere)
+      const barRadius = radius * 1.05;
+      const barWidth = (Math.PI * 2 * barRadius) / barCount * 0.6;
+      ctx.save();
+      for (let i = 0; i < barCount; i++) {
+        const angle = (i / barCount) * Math.PI * 2 - Math.PI / 2;
+        const barHeight = bars[i] * radius * 0.35;
+        const x1 = center + Math.cos(angle) * barRadius;
+        const y1 = center + Math.sin(angle) * barRadius;
+        const x2 = center + Math.cos(angle) * (barRadius + barHeight);
+        const y2 = center + Math.sin(angle) * (barRadius + barHeight);
+
+        const alpha = 0.15 + bars[i] * 0.5;
+        ctx.strokeStyle = `rgba(16, 185, 129, ${alpha})`;
+        ctx.lineWidth = barWidth;
+        ctx.lineCap = 'round';
+        ctx.beginPath();
+        ctx.moveTo(x1, y1);
+        ctx.lineTo(x2, y2);
+        ctx.stroke();
+      }
+      ctx.restore();
+
+      // Project and sort dots
+      const projected = dots.map((dot) => {
+        // Rotate Y
+        let x = dot.x * Math.cos(angleY) - dot.z * Math.sin(angleY);
+        let z = dot.x * Math.sin(angleY) + dot.z * Math.cos(angleY);
+        let y = dot.y;
+
+        // Rotate X (slight tilt)
+        let y2 = y * Math.cos(angleX) - z * Math.sin(angleX);
+        let z2 = y * Math.sin(angleX) + z * Math.cos(angleX);
+
+        const scale = fov / (fov + z2 * radius);
+        const px = center + x * radius * scale;
+        const py = center + y2 * radius * scale;
+
+        // Map z depth to a bar index for pulsing
+        const normalizedZ = (z2 + 1) / 2;
+        const barIdx = Math.floor(normalizedZ * (barCount - 1));
+        const pulse = 1 + bars[barIdx] * 0.15;
+
+        return {
+          x: px,
+          y: py,
+          z: z2,
+          scale: scale * pulse,
+        };
+      });
+
+      // Sort back to front
+      projected.sort((a, b) => a.z - b.z);
+
+      // Draw dots
+      for (const p of projected) {
+        const depth = (p.z + 1) / 2; // 0 = back, 1 = front
+        const alpha = 0.05 + depth * 0.85;
+        const dotSize = Math.max(0.5, 1.5 * p.scale);
+
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, dotSize, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(16, 185, 129, ${alpha})`;
+        ctx.fill();
+
+        // Bright glow on front-facing dots
+        if (depth > 0.75) {
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, dotSize * 2.5, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(16, 185, 129, ${(depth - 0.75) * 0.2})`;
+          ctx.fill();
+        }
+      }
+
+      // Inner highlight ring
+      ctx.beginPath();
+      ctx.arc(center, center, radius * 0.98, 0, Math.PI * 2);
+      ctx.strokeStyle = 'rgba(16, 185, 129, 0.04)';
+      ctx.lineWidth = 1;
+      ctx.stroke();
+
+      animId = requestAnimationFrame(draw);
+    }
+
+    draw();
+
+    return () => cancelAnimationFrame(animId);
+  }, []);
 
   return (
-    <section
+    <motion.section
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
       id="home"
       className="relative py-20 flex items-center overflow-hidden"
     >
@@ -251,7 +254,7 @@ useEffect(() => {
             {/* CTA Buttons */}
             <div className="flex flex-wrap gap-4 mb-10">
               <Link
-              target="_blank"
+                target="_blank"
                 href="https://docs.google.com/document/d/1v7yN2TpiqF5Q8p3ld48m6L-NOm1UYd1hPXqqvFPkNkY/edit?usp=sharing"
                 className="group inline-flex items-center gap-2 px-7 py-3.5 bg-accent hover:bg-accent-dark text-white font-semibold rounded-xl transition-all duration-200 hover:shadow-lg hover:shadow-accent/25"
               >
@@ -306,9 +309,9 @@ useEffect(() => {
               {/* Image container */}
               <div className="relative w-64 h-64 sm:w-80 sm:h-80 lg:w-[500px] lg:h-[500px] flex items-center justify-center">
                 <div className="absolute inset-0 flex items-center justify-center z-10">
-                  <Image 
+                  <Image
                     src='./assets/profile.png'
-                    alt="Profile" 
+                    alt="Profile"
                     height={800}
                     width={700}
                     className="w-[90%] h-[90%] -mt-16 object-cover rounded-full  shadow-2xl"
@@ -345,6 +348,6 @@ useEffect(() => {
           <div className="w-1 h-2 bg-accent rounded-full animate-bounce" />
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 }

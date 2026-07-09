@@ -10,22 +10,22 @@ const skillCategories = [
     title: 'Frontend',
     icon: <Code size={24} className="text-accent" />,
     skills: [
-      { name: 'React.js', level: 84 },
-      { name: 'Next.js', level: 72 },
-      { name: 'JavaScript', level: 92 },
-      { name: 'Tailwind CSS', level: 97 },
-      { name: 'HTML5/CSS3', level: 96 },
+      { name: 'React.js', level: 84, category: "JS Library", iconUrl: "https://fonts.gstatic.com/render/v1/Material+Symbols+Outlined/40dp/javascript.kt?var=opsz,wght,FILL,GRAD,ROND@40,400,0,0,50"},
+      { name: 'Next.js', level: 72, category: "React Framework" },
+      { name: 'JavaScript', level: 92, category: "Programming Language" },
+      { name: 'Tailwind CSS', level: 97, category: "CSS Utility" },
+      { name: 'Motion.dev', level: 96, category: "Animation Framework" },
     ],
   },
   {
-    title: 'Backend',
+    title: 'Backend & Tools',
     icon: <Settings size={24} className="text-accent" />,
     skills: [
-      { name: 'Github', level: 84 },
-      { name: 'Linux', level: 73 },
-      { name: 'MongoDB', level: 82 },
-      { name: 'Node.js', level: 65 },
-      { name: 'Express.js', level: 87 },
+      { name: 'Git', level: 84, category: "Version Control" },
+      { name: 'Linux', level: 73, category: "Operating system" },
+      { name: 'MongoDB', level: 82, category: "Database" },
+      { name: 'Node.js', level: 65, category: "Backend" },
+      { name: 'Express.js', level: 87, category: "Node.js framework" },
     ],
   }
 ];
@@ -82,7 +82,7 @@ function SkillCard({ skill, categoryIcon }) {
           {skill.name}
         </h3>
         <span className="text-[10px] font-semibold tracking-widest uppercase text-slate-500 group-hover:text-accent/80 transition-colors">
-          Technology
+          {skill.category}
         </span>
       </div>
 
