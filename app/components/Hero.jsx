@@ -208,7 +208,7 @@ export default function Hero() {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       id="home"
-      className="relative py-20 flex items-center overflow-hidden"
+      className="relative py-10 flex items-center overflow-hidden"
     >
       {/* Background Effects */}
       <div className="absolute inset-0">
@@ -232,10 +232,10 @@ export default function Hero() {
               <span className="text-accent text-sm font-medium">Available for work</span>
             </div>
 
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold leading-[1.1] tracking-tight mb-4">
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-7xl font-bold leading-[1.1] tracking-tight mb-4">
               <span className="text-white">Hi, I&apos;m</span>
               <br />
-              <span className="text-accent">Jubair Alam</span>
+              <span className="text-accent">Jubair Alam Alif</span>
             </h1>
 
             <div className="h-10 sm:h-12 mb-6">
@@ -302,8 +302,6 @@ export default function Hero() {
           <div className="order-1 lg:order-2 flex justify-center lg:justify-end">
             <div className="relative">
               {/* Decorative rings */}
-              <div className="absolute -inset-4 rounded-2xl border border-accent/10 animate-[spin_20s_linear_infinite]" />
-              <div className="absolute -inset-8 rounded-2xl border border-accent/5 animate-[spin_30s_linear_infinite_reverse]" />
               <div className="absolute -inset-12 rounded-full bg-accent/5 blur-2xl" />
 
               {/* Image container */}
