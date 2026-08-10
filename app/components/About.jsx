@@ -1,8 +1,8 @@
-import { Code2, Palette, Rocket, Users } from 'lucide-react';
+import { Building2, Code2, Palette, Rocket } from 'lucide-react';
 
 const stats = [
   { icon: Code2, value: '20+', label: 'Projects Completed' },
-  { icon: Users, value: '10+', label: 'Happy Clients' },
+  { icon: Building2, value: '500+', label: 'Industrial Hours' },
   { icon: Rocket, value: '2+', label: 'Years Experience' },
   { icon: Palette, value: '98%', label: 'Client Satisfaction' },
 ];
@@ -45,11 +45,11 @@ export default function About() {
           <div>
             <h3 className="text-2xl lg:text-3xl font-bold text-white mb-6">
               I&apos;m Jubair Alam, a passionate{' '}
-              <span className="text-accent">Full Stack Developer</span>
+              <span className="text-accent">Frontend Web Engineer</span>
             </h3>
             <div className="space-y-4 text-slate-400 leading-relaxed mb-8">
               <p>
-                I am a full stack developer with 3+ years of experience building modern,
+                I am a frontend developer with 1+ years of experience building modern,
                 responsive, and user-friendly web applications. I specialize in creating
                 clean, efficient, and scalable digital solutions.
               </p>
