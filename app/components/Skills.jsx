@@ -22,10 +22,10 @@ const skillCategories = [
     icon: <Settings size={24} className="text-accent" />,
     skills: [
       { name: 'Git', level: 84, category: "Version Control" },
-      { name: 'Linux', level: 73, category: "Operating system" },
-      { name: 'MongoDB', level: 82, category: "Database" },
-      { name: 'Node.js', level: 65, category: "Backend" },
-      { name: 'Express.js', level: 87, category: "Node.js framework" },
+      { name: 'Linux', level: 74, category: "Operating system" },
+      { name: 'MongoDB', level: 68, category: "Database" },
+      { name: 'Node.js', level: 38, category: "Backend" },
+      { name: 'Express.js', level: 67, category: "Node.js framework" },
     ],
   }
 ];

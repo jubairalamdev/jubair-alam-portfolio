@@ -8,8 +8,8 @@ const funnelDisplay = Funnel_Display({
 });
 
 export const metadata = {
-  title: 'Jubair Alam | Full Stack Developer',
-  description: 'Portfolio of Jubair Alam - Full Stack Developer specializing in modern web technologies',
+  title: 'Jubair Alam | Frontend Web Engineer',
+  description: 'Portfolio of Jubair Alam - Frontend Developer specializing in modern web technologies',
 };
 
 export default function RootLayout({ children }) {

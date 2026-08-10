@@ -72,7 +72,7 @@ const projects = [
 
 const filters = [
   { label: 'All', value: 'all' },
-  { label: 'Full Stack', value: 'fullstack' },
+  { label: 'MERN Stack', value: 'fullstack' },
   { label: 'Frontend', value: 'frontend' },
   { label: 'Backend', value: 'backend' },
 ];

@@ -2,7 +2,7 @@ import { Award, ExternalLink, Calendar } from 'lucide-react';
 
 const certifications = [
   {
-    title: 'MERN Stack Web Developer',
+    title: 'Ai Full Stack Web Developer',
     issuer: 'Programming Hero',
     date: '2026',
     credentialId: 'META-FE-2024-XXXX',
@@ -27,7 +27,7 @@ const certifications = [
 
 export default function Certifications() {
   return (
-    <section id="certifications" className="relative py-24 lg:py-32">
+    <section id="certifications" className="relative py-10 lg:py-16">
       <div className="absolute inset-0 bg-gradient-to-b from-dark-900 via-dark-800/30 to-dark-900" />
 
       <div className="relative max-w-7xl mx-auto px-6 lg:px-8">

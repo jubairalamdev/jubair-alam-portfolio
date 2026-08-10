@@ -6,7 +6,7 @@ import Image from 'next/image';
 import { motion } from "motion/react"
 import Link from 'next/link';
 
-const roles = ['Full Stack Developer', 'MERN Stack Expert', 'Problem Solver', 'UI/UX Enthusiast'];
+const roles = ['Frontend Web Engineer', 'MERN Focused Developer', 'Problem Solver', 'UI/UX Enthusiast'];
 
 export default function Hero() {
   const [roleIndex, setRoleIndex] = useState(0);
@@ -246,7 +246,7 @@ export default function Hero() {
             </div>
 
             <p className="text-slate-400 text-base lg:text-lg leading-relaxed max-w-lg mb-8">
-              Passionate full stack developer with expertise in building scalable web applications.
+              Passionate frontend developer with expertise in building scalable web applications.
               I transform ideas into elegant, high-performance digital experiences using modern
               technologies and clean code practices.
             </p>
@@ -255,7 +255,7 @@ export default function Hero() {
             <div className="flex flex-wrap gap-4 mb-10">
               <Link
                 target="_blank"
-                href="https://docs.google.com/document/d/1v7yN2TpiqF5Q8p3ld48m6L-NOm1UYd1hPXqqvFPkNkY/edit?usp=sharing"
+                href="https://drive.google.com/file/d/1vBTHsBOKjnDdbTUWGq3jRfA1jMuJEuQV/view?usp=sharing"
                 className="group inline-flex items-center gap-2 px-7 py-3.5 bg-accent hover:bg-accent-dark text-white font-semibold rounded-xl transition-all duration-200 hover:shadow-lg hover:shadow-accent/25"
               >
                 <ExternalLink size={18} />
