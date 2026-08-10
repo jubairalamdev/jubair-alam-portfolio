@@ -329,7 +329,7 @@ export default function Hero() {
 
               {/* Floating badges */}
               <div className="absolute z-10 md:bottom-10 -bottom-2 -left-1 md:left-10 px-4 py-2 bg-dark-600 border border-white/10 rounded-xl shadow-xl bouncing-div-1">
-                <div className="text-2xl font-bold text-accent">1000+</div>
+                <div className="text-2xl font-bold text-accent">500+</div>
                 <div className="text-xs text-slate-400">Hours Coded</div>
               </div>
               <div className="absolute md:top-8 md:right-10 -top-2 -right-1 z-10 px-4 py-2 bg-dark-600 border border-white/10 rounded-xl shadow-xl bouncing-div-2">
