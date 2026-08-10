@@ -174,7 +174,3 @@ body {
 .animate-glow-medium {
   animation: move-glow 15s infinite ease-in-out reverse;
 }
-
-html, body, * {
-  cursor: none !important; /* Force hide default cursor everywhere */
-}

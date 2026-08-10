@@ -1,82 +1,112 @@
 "use client";
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+
+const TRAIL_COUNT = 6;
+const TRAIL_SIZES = [18, 14, 11, 9, 7, 5];
+const TRAIL_OPACITY = [0.55, 0.4, 0.28, 0.18, 0.12, 0.08];
+const RING_SIZE = 44;
+const RING_LERP = 0.3;
+const TRAIL_LERP_FACTORS = [0.38, 0.28, 0.2, 0.14, 0.09, 0.05];
 
 export default function Cursor() {
-  const [position, setPosition] = useState({ x: 0, y: 0 });
-  const [isHovering, setIsHovering] = useState(false);
   const [isHidden, setIsHidden] = useState(false);
+  const ringRef = useRef(null);
+  const dotRefs = useRef([]);
+  const hoveringRef = useRef(false);
 
   useEffect(() => {
-    // Check if device supports hover (ignore touch screens)
-    const matchMedia = window.matchMedia('(hover: hover)');
-    if (!matchMedia.matches) {
+    if (!window.matchMedia('(hover: hover)').matches) {
       setIsHidden(true);
       return;
     }
 
-    const handleMouseMove = (e) => {
-      setPosition({ x: e.clientX, y: e.clientY });
+    const target = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
+    const trail = Array.from({ length: TRAIL_COUNT + 1 }, () => ({ ...target }));
+
+    const onMouseMove = (e) => {
+      target.x = e.clientX;
+      target.y = e.clientY;
     };
 
-    const handleMouseOver = (e) => {
-      const target = e.target;
-      if (
-        target.tagName === 'A' ||
-        target.tagName === 'BUTTON' ||
-        target.tagName === 'INPUT' ||
-        target.tagName === 'TEXTAREA' ||
-        target.closest('a') ||
-        target.closest('button') ||
-        window.getComputedStyle(target).cursor === 'pointer'
-      ) {
-        setIsHovering(true);
-      } else {
-        setIsHovering(false);
+    const onMouseOver = (e) => {
+      const el = e.target;
+      hoveringRef.current = !!(
+        el.tagName === 'A' ||
+        el.tagName === 'BUTTON' ||
+        el.tagName === 'INPUT' ||
+        el.tagName === 'TEXTAREA' ||
+        el.closest('a, button, input, textarea') ||
+        window.getComputedStyle(el).cursor === 'pointer'
+      );
+    };
+
+    let raf;
+    const loop = () => {
+      trail[0].x += (target.x - trail[0].x) * RING_LERP;
+      trail[0].y += (target.y - trail[0].y) * RING_LERP;
+      for (let i = 1; i < trail.length; i++) {
+        trail[i].x += (trail[i - 1].x - trail[i].x) * TRAIL_LERP_FACTORS[i - 1];
+        trail[i].y += (trail[i - 1].y - trail[i].y) * TRAIL_LERP_FACTORS[i - 1];
       }
+
+      if (ringRef.current) {
+        const scale = hoveringRef.current ? 0.72 : 1;
+        ringRef.current.style.transform = `translate3d(${trail[0].x}px, ${trail[0].y}px, 0) translate(-50%, -50%) scale(${scale})`;
+        ringRef.current.style.transition = hoveringRef.current
+          ? 'width 0.25s, height 0.25s, border-width 0.25s'
+          : '';
+      }
+      for (let i = 1; i < trail.length; i++) {
+        if (dotRefs.current[i - 1]) {
+          dotRefs.current[i - 1].style.transform = `translate3d(${trail[i].x}px, ${trail[i].y}px, 0) translate(-50%, -50%)`;
+        }
+      }
+
+      raf = requestAnimationFrame(loop);
     };
 
-    document.addEventListener('mousemove', handleMouseMove);
-    document.addEventListener('mouseover', handleMouseOver);
+    document.addEventListener('mousemove', onMouseMove);
+    document.addEventListener('mouseover', onMouseOver);
+    raf = requestAnimationFrame(loop);
 
     return () => {
-      document.removeEventListener('mousemove', handleMouseMove);
-      document.removeEventListener('mouseover', handleMouseOver);
+      document.removeEventListener('mousemove', onMouseMove);
+      document.removeEventListener('mouseover', onMouseOver);
+      cancelAnimationFrame(raf);
     };
   }, []);
 
   if (isHidden) return null;
 
   return (
-    <div
-      className="fixed top-0 left-0 z-[9999] pointer-events-none mix-blend-difference"
-      style={{
-        transform: `translate3d(${position.x}px, ${position.y}px, 0) translate(-50%, -50%)`,
-        transition: 'transform 0.1s cubic-bezier(0.1, 0.7, 1.0, 0.1)',
-      }}
-    >
-      {/* 
-         OUTER CIRCLE (The Halo)
-         Default: Visible with 20% opacity and green color
-         Hover: Fades out completely (opacity-0) and shrinks slightly
-      */}
+    <div aria-hidden="true">
+      {/* Color-inverting ring at the cursor head */}
       <div
-        className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#34d399]/20 transition-all duration-300 ease-out ${
-          isHovering ? 'opacity-1 scale-75' : 'opacity-100 scale-100'
-        }`}
-        style={{ width: '48px', height: '48px' }}
+        ref={ringRef}
+        className="fixed top-0 left-0 z-[9999] pointer-events-none mix-blend-difference rounded-full border-2 border-[#34d399] transition-[width,height] duration-300 ease-out"
+        style={{
+          width: RING_SIZE,
+          height: RING_SIZE,
+          transform: `translate3d(-100px, -100px, 0)`,
+        }}
       />
 
-      {/* 
-         INNER DOT (The Core)
-         Default: Small solid dot
-         Hover: Slightly larger to emphasize the click area
-      */}
-      <div
-        className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[#34d399] rounded-full transition-all duration-300 ease-out ${
-          isHovering ? 'w-2 h-2' : 'w-1.5 h-1.5'
-        }`}
-      />
+      {/* Trailing dots */}
+      {TRAIL_SIZES.map((size, i) => (
+        <div
+          key={i}
+          ref={(el) => (dotRefs.current[i] = el)}
+          className="fixed top-0 left-0 z-[9990] pointer-events-none rounded-full bg-[#34d399]"
+          style={{
+            width: size,
+            height: size,
+            opacity: TRAIL_OPACITY[i],
+            transform: `translate3d(-100px, -100px, 0)`,
+            boxShadow: '0 0 12px rgba(52, 211, 153, 0.4)',
+          }}
+        />
+      ))}
     </div>
   );
 }
