@@ -18,6 +18,18 @@ body {
   overflow-x: hidden;
 }
 
+/* Custom smooth cursor hides the native one (set inline on <body> by
+   SmoothCursor.jsx); keep a real text caret in form fields. */
+input,
+textarea,
+select {
+  cursor: text;
+}
+
+a {
+  cursor: none;
+}
+
 /* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 8px;

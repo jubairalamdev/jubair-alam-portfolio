@@ -1,6 +1,6 @@
 import { Funnel_Display } from 'next/font/google';
 import './globals.css';
-import Cursor from './components/Cursor';
+import SmoothCursor from './components/SmoothCursor';
 
 const funnelDisplay = Funnel_Display({
   subsets: ['latin'],
@@ -18,7 +18,7 @@ export default function RootLayout({ children }) {
       <body className="antialiased overflow-x-hidden relative">
         
          {/* CUSTOM CURSOR */}
-        <Cursor />
+        <SmoothCursor />
 
         {/* Ambient Back-sided Glow Overlay */}
         <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden">
