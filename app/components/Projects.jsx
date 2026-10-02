@@ -4,13 +4,25 @@ import { useState } from 'react';
 import { ExternalLink, Github, Folder } from 'lucide-react';
 import Image from 'next/image';
 
+// Ai-Pather.png
+
 const projects = [
+  {
+    title: 'AI Pather',
+    description:
+      "AI Pather is an AI-powered zero to job readiness adaptive career learning platform with many learning tools.",
+    image: './assets/Ai-Pather.png',
+    tags: ['Next', 'Node', 'Express', 'Better Auth', "Stripe", "PostgreSQL", "Prisma"],
+    liveUrl: 'https://digital-life-lessons-flame.vercel.app/',
+    githubUrl: 'https://github.com/jubairalamdev/digital-life-lessons-a10/tree/master',
+    featured: true,
+  },
   {
     title: 'Digital Life Lessons',
     description:
       "Digital Life Lessons is a Full Stack MERN Project with every social media like features available.",
     image: './assets/digital-life-lessons.png',
-    tags: ['Next', 'Node', 'Express', 'Tailwind', 'Better Auth', "Stripe"],
+    tags: ['Next', 'Node', 'Express', 'Tailwind', 'Better Auth', "Stripe", "MongoDB"],
     liveUrl: 'https://digital-life-lessons-flame.vercel.app/',
     githubUrl: 'https://github.com/jubairalamdev/digital-life-lessons-a10/tree/master',
     featured: true,
@@ -56,18 +68,7 @@ const projects = [
     liveUrl: 'https://english-janala-by-jubair-alam.netlify.app/',
     githubUrl: 'https://github.com/jubairalamdev/English-Janala/',
     featured: false,
-  },
-  {
-    title: 'Green Earth',
-    description:
-      'This is a Plant E-commerce Dashboard that focuses on a seamless user journey.',
-    image: "./assets/green-earth.png",
-    tags: ['HTML5', 'Tailwind CSS', 'CSS', 'JavaScript'],
-    
-    liveUrl: 'https://github.com/jubairalamdev/Green-Earth/',
-    githubUrl: 'https://green-earth-by-jubair-alam.netlify.app/',
-    featured: false,
-  },
+  }
 ];
 
 const filters = [
