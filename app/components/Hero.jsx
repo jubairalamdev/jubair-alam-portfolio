@@ -255,11 +255,11 @@ export default function Hero() {
             <div className="flex flex-wrap gap-4 mb-10">
               <Link
                 target="_blank"
-                href="https://drive.google.com/file/d/1vBTHsBOKjnDdbTUWGq3jRfA1jMuJEuQV/view?usp=sharing"
+                href="https://drive.google.com/file/d/1sHdgVCdRrX0-0H06qeFl9mqyFZAWxqnU/view?usp=sharing"
                 className="group inline-flex items-center gap-2 px-7 py-3.5 bg-accent hover:bg-accent-dark text-white font-semibold rounded-xl transition-all duration-200 hover:shadow-lg hover:shadow-accent/25"
               >
                 <ExternalLink size={18} />
-                GET CV
+                GET RESUME
               </Link>
               <a
                 href="#contact"
@@ -326,14 +326,14 @@ export default function Hero() {
               </div>
 
               {/* Floating badges */}
-              <div className="absolute z-10 md:bottom-10 -bottom-2 -left-1 md:left-10 px-4 py-2 bg-dark-600 border border-white/10 rounded-xl shadow-xl bouncing-div-1">
+              {/* <div className="absolute z-10 md:bottom-10 -bottom-2 -left-1 md:left-10 px-4 py-2 bg-dark-600 border border-white/10 rounded-xl shadow-xl bouncing-div-1">
                 <div className="text-2xl font-bold text-accent">500+</div>
                 <div className="text-xs text-slate-400">Hours Coded</div>
               </div>
               <div className="absolute md:top-8 md:right-10 -top-2 -right-1 z-10 px-4 py-2 bg-dark-600 border border-white/10 rounded-xl shadow-xl bouncing-div-2">
                 <div className="text-2xl font-bold text-accent">20+</div>
                 <div className="text-xs text-slate-400">Projects</div>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
