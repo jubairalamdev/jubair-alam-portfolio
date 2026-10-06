@@ -12,9 +12,9 @@ const skillCategories = [
     skills: [
       { name: 'React.js', level: 84, category: "JS Library", iconUrl: "https://fonts.gstatic.com/render/v1/Material+Symbols+Outlined/40dp/javascript.kt?var=opsz,wght,FILL,GRAD,ROND@40,400,0,0,50"},
       { name: 'Next.js', level: 72, category: "React Framework" },
-      { name: 'JavaScript', level: 92, category: "Programming Language" },
-      { name: 'Tailwind CSS', level: 97, category: "CSS Utility" },
-      { name: 'Motion.dev', level: 96, category: "Animation Framework" },
+      { name: 'JavaScript(ES6+)', level: 92, category: "Programming Language" },
+      { name: 'TypeScript', level: 97, category: "Programming Lanuage" },
+      { name: 'Framer Motion', level: 96, category: "Animation Framework" },
     ],
   },
   {
