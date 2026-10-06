@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from 'react';
-import { Send, MapPin, Mail, Phone, MessageSquare } from 'lucide-react';
+import { Send, MapPin, Mail, Phone, MessageSquare, Github, MailCheck, Linkedin } from 'lucide-react';
 
 const contactInfo = [
   {
@@ -104,20 +104,27 @@ export default function Contact({ showToast }) {
 
             {/* Social */}
             <div className="pt-4">
-              <div className="flex items-center gap-2 text-slate-500 text-sm mb-4">
-                <MessageSquare size={16} />
-                <span>Follow me</span>
-              </div>
-              <div className="flex gap-3">
-                {['GitHub', 'LinkedIn', 'Twitter', 'Facebook'].map((platform) => (
-                  <a
-                    key={platform}
-                    href="#"
-                    className="px-4 py-2 bg-dark-500 hover:bg-accent/10 border border-white/5 hover:border-accent/20 rounded-lg text-slate-400 hover:text-accent text-xs font-medium transition-all duration-200"
-                  >
-                    {platform}
-                  </a>
-                ))}
+              
+              <div className="flex items-center gap-4">
+                <span className="text-slate-500 text-sm">Find me on</span>
+                <div className="w-8 h-px bg-slate-700" />
+                <div className="flex gap-3">
+                  {[
+                    { icon: Github, href: 'https://github.com/jubairalamdev', label: 'GitHub' },
+                    { icon: Linkedin, href: 'https://www.linkedin.com/in/jubair-alam-alif/', label: 'LinkedIn' },
+                    { icon: MailCheck, href: 'mailto:jubairalam.dev@gmail.com', label: 'Email' },
+                  ].map(({ icon: Icon, href, label }) => (
+                    <a
+                      key={label}
+                      href={href}
+                      aria-label={label}
+                      target='blank'
+                      className="w-10 h-10 rounded-lg bg-white/5 hover:bg-accent/10 border border-white/5 hover:border-accent/20 flex items-center justify-center text-slate-400 hover:text-accent transition-all duration-200"
+                    >
+                      <Icon size={18} />
+                    </a>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
