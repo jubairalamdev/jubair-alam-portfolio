@@ -94,7 +94,7 @@ export default function Navbar() {
           <div className="hidden lg:block">
             <Link
               target="_blank"
-              href="https://drive.google.com/file/d/1vBTHsBOKjnDdbTUWGq3jRfA1jMuJEuQV/view?usp=sharing"
+              href="https://drive.google.com/file/d/1sHdgVCdRrX0-0H06qeFl9mqyFZAWxqnU/view?usp=sharing"
               className="px-5 py-2.5 bg-accent hover:bg-accent-dark text-white text-sm font-semibold rounded-lg transition-all duration-200 hover:shadow-lg hover:shadow-accent/20"
             >
               Hire Me
